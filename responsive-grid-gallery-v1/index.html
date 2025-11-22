@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Grid Gallery v1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- 
+      СЕМАНТИКА:
+      Вместо <div class="wrapper"> используем <ul class="gallery">,
+      так как это список изображений.
+    -->
+    <ul class="gallery">
+        <!-- Элемент 1: Вертикальное фото (Tall) -->
+        <li class="gallery__item">
+            <img src="https://picsum.photos/seed/1/400/800" alt="Случайное вертикальное фото" class="gallery__image">
+        </li>
+
+        <!-- Элемент 2: Горизонтальное фото (Wide) -->
+        <li class="gallery__item">
+            <img src="https://picsum.photos/seed/2/800/400" alt="Случайное горизонтальное фото" class="gallery__image">
+        </li>
+
+        <!-- Элемент 3: Квадратное фото -->
+        <li class="gallery__item">
+            <img src="https://picsum.photos/seed/3/600/600" alt="Случайное квадратное фото" class="gallery__image">
+        </li>
+
+        <!-- Элемент 4: Очень маленькое фото -->
+        <li class="gallery__item">
+            <img src="https://picsum.photos/seed/4/100/100" alt="Случайное маленькое фото" class="gallery__image">
+        </li>
+        <!-- Элемент 5: Еще одно для демонстрации переноса -->
+        <li class="gallery__item">
+            <img src="https://picsum.photos/seed/5/700/500" alt="Случайное фото" class="gallery__image">
+        </li>
+    </ul>
+
+</body>
+</body>
+
+</html>

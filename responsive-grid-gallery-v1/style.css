@@ -1,0 +1,90 @@
+/* RESET & BASE 
+    Базовый сброс для предсказуемого поведения
+*/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, sans-serif;
+    background-color: #f4f4f9;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+/* VARIABLES
+           Настройки компонента вынесены в переменные
+        */
+:root {
+    --gallery-gap: 1rem;
+    --gallery-min-item-width: 250px;
+    /* Минимальная ширина до переноса */
+    --gallery-radius: 12px;
+}
+
+/* BLOCK: .gallery
+           Используем семантический список или section вместо div.wrapper
+        */
+.gallery {
+    display: grid;
+    width: 100%;
+    max-width: 1200px;
+
+    /* GRID MAGIC:
+               1. repeat(auto-fit, ...): создает столько колонок, сколько поместится.
+               2. minmax(250px, 1fr): колонка не будет уже 250px, но может растягиваться (1fr).
+            */
+    grid-template-columns: repeat(auto-fit,
+            minmax(var(--gallery-min-item-width), 1fr));
+    gap: var(--gallery-gap);
+
+    /* Убираем стандартные стили списка, если используем <ul> */
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+/* ELEMENT: .gallery__item
+           Обертка для изображения (карточка)
+        */
+.gallery__item {
+    margin: 0;
+    /* Сброс для <figure> */
+    border-radius: var(--gallery-radius);
+    overflow: hidden;
+    /* Чтобы img не вылезал за скругления */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #ddd;
+    /* Цвет фона пока картинка грузится */
+
+    /* ASPECT RATIO:
+               Делает контейнер всегда квадратным (1/1) или прямоугольным (4/3, 16/9).
+               Это гарантирует равную высоту всех ячеек.
+            */
+    aspect-ratio: 1 / 1;
+}
+
+/* ELEMENT: .gallery__image
+        */
+.gallery__image {
+    width: 100%;
+    height: 100%;
+    display: block;
+
+    /* OBJECT-FIT:
+               Ключевое свойство! Работает как background-size: cover.
+               Изображение заполнит блок, обрезав лишнее, но не сплющится.
+            */
+    object-fit: cover;
+
+    transition: transform 0.3s ease;
+}
+
+/* MODIFIER: Ховер эффект (опционально) */
+.gallery__item:hover .gallery__image {
+    transform: scale(1.05);
+}
