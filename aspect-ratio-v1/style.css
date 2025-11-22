@@ -1,0 +1,87 @@
+/* news-card.css */
+:root {
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --card-bg: #ffffff;
+    --text-main: #333;
+    --text-muted: #767676;
+
+    /* Цвета для скелетона: чуть светлее и чуть темнее серого */
+    --skeleton-base: #f5ea89;
+    --skeleton-shine: #f5f5f5;
+    --animation-duration: 0.85s;
+}
+
+/* Определяем анимацию "блика" */
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.news-card {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    /* Чтобы картинка не вылезала за скругления */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.news-card__image {
+    display: block;
+    width: 100%;
+    /* Картинка занимает всю ширину контейнера */
+
+    /* ВАЖНО: Задаем соотношение сторон */
+    aspect-ratio: 16 / 9;
+
+    /* Обработка контента (см. Шаг 2) */
+    object-fit: cover;
+
+    border-radius: 8px 8px 0 0;
+    /* Скругление только сверху (опционально) */
+
+    /* 3. Магия Скелетона */
+    /* Фон состоит из базового цвета и градиента (блика) поверх него */
+    background-color: var(--skeleton-base);
+    background-image: linear-gradient(90deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.5) 50%,
+            rgba(255, 255, 255, 0) 100%);
+
+    /* Размер фона больше самого элемента, чтобы мы могли двигать градиент */
+    background-size: 200% 100%;
+
+    /* Запускаем бесконечную анимацию */
+    animation: shimmer var(--animation-duration) infinite linear;
+}
+
+.news-card__content {
+    padding: var(--spacing-md);
+}
+
+.news-card__date {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: var(--spacing-sm);
+    display: block;
+}
+
+.news-card__title {
+    font-size: 1.25rem;
+    line-height: 1.3;
+    margin: 0 0 var(--spacing-sm) 0;
+    color: var(--text-main);
+}
+
+.news-card__summary {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+}
